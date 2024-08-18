@@ -1,0 +1,38 @@
+Bass 93.2 FM	*	http://live.bassfm.id/;
+CampursariFM 89.2	*	https://a8.siar.us/listen/campursari/stream
+Classy NetRadio	*	http://streaming.classynetradio.com/radio/8000/classySD
+Gajahmada	*	http://server.radioimeldafm.co.id:8040/gajahmadafm
+Gita FM Jombang	*	http://svara-stream.radioddns.net:8000/jombang_gitafm_?1701156041862
+IRadio Jakarta 	*	http://n12.radiojar.com/4ywdgup3bnzuv
+KISI 93.4 FM BOGOR	*	http://live.serverstreaming.net:9340/kisifm
+KISS 105 FM	*	http://live.kissfm-medan.com:8080/kissfm.mp3
+Kotaperak FM 94,6 MHZ * http://203.30.236.2:8000/kotaperak
+Mahardika FM Blitar	*	http://streaming.mahardhikafm.com:9590/radio?1701155604129
+Menara FM Bali	*	http://c1.siar.us:10280/menarafmbali
+Mendhut FM Karanganyar * http://172.104.39.14:8790/stream
+Mettaswara 2010 an	*	http://mettaswara.com:8700/m2010
+Mettaswara Campursari	*	http://mettaswara.com:8700/cps
+Mettaswara Dangdut	*	http://mettaswara.com:8700/d4d
+Mettaswara Indo 2000an	*	http://mettaswara.com:8700/indo00
+Mettaswara Indonesia	*	http://mettaswara.com:8700/indo
+Mettaswara Jawa	*	http://mettaswara.com:8700/java
+Mettaswara Love	*	http://mettaswara.com:8700/love
+Mettaswara Mix	*	http://mettaswara.com:8700/mix
+Mettaswara Koplo	*	http://mettaswara.com:8700/koplo
+Mettaswara Slow	*	http://mettaswara.com:8700/slow
+Mettaswara Slow Rock	*	http://mettaswara.com:8700/slowrock
+Motion	*	http://cast1.my-control-panel.com/proxy/radioso2/stream
+Nagaswara	*	http://live.nagaswarafm.com:8088/stream
+Ninetysix Radio	*	http://c4.siar.us:8950/stream
+Oz Radio * http://45.64.97.211:1031/;?ver=607511
+PAS FM Pati	*	http://45.64.97.82:8886/;?1701155704090
+Radio Rodja Bogor	*	http://radioislamindonesia.com/rodja.mp3
+Rama FM Bandung	*	http://i.klikhost.com:8330/;stream.nsv
+Retjobuntung	*	http://45.64.97.82:9940/stream
+RSFM Pati	*	http://live4.rs3fm.com:8000/rs3?1701156161974
+Sanjaya FM Magetan	*	http://sanjayafm.u7.myradio.web.id:8888/sanjayafm
+Suara Muslim Surabaya	*	http://pu.klikhost.com:8052/stream
+Suara Surabaya	*	http://c5.siar.us:8000/stream
+TOPFM 95.1	*	http://streaming.topfm951.net:9510/stream
+Trax 101.4 FM Jakarta	*	http://n07.radiojar.com/rrqf78p3bnzuv.mp3?rj-tok=AAABi_8o08gA5jtQz3StVoSgZA&rj-ttl=5
+V Radio 106 6 FM Jakarta  	*	http://202.147.199.100:8000/;stream.nsv
