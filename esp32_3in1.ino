@@ -1,6 +1,6 @@
 #include "FS.h"
 #include "Arduino.h"
-#include "BluetoothA2DPSink.h"
+//#include "BluetoothA2DPSink.h"
 #include "Audio.h"
 #include "SD.h"
 #include "SPI.h"
@@ -53,14 +53,94 @@ int jml_stasiun , indexradio = 0;
 
 
 //blutut
-//I2SStream out;
-//BluetoothA2DPSink a2dp_sink(out);
-BluetoothA2DPSink a2dp_sink;
+//BluetoothA2DPSink a2dp_sink;
 
 
 //variabel umum
 int modee = 0; //0. awal nyala, 1. radio internet, 2. mp3 player, 3. bluetooth
 int volume = 9;
+
+
+//-----------------------------DISPLAY-------------------------
+void PrintText(int a, String pesan) {
+  display.clearDisplay();
+  display.setTextColor(SSD1306_WHITE);        // Draw white text
+  if (a == 1) {                                                                 //pesan
+    display.drawLine(0, 0, display.width() - 1, 0, SSD1306_WHITE);
+    display.setTextSize(2);             // Normal 1:1 pixel scale
+    display.setCursor(0, 7);            // Start at top-left corner
+    display.println(pesan);
+    display.drawLine(0, display.height() - 1, display.width() - 1, display.height() - 1 , SSD1306_WHITE);
+  }  else if (a == 2) {                                                         //radio internet
+    display.setTextSize(1);             // Normal 1:1 pixel scale
+    display.setCursor(0, 0);            // Start at top-left corner
+    display.print("IP  :");
+    display.println(IP);
+    display.print("Vol :");
+    display.print(volume / 3);
+    display.print(" /Chnl :");
+    display.print(indexradio + 1);
+    display.print("/");
+    display.println(jml_stasiun);
+    display.print("Name:");
+    String nama = url[indexradio][0];
+    nama.trim();
+    display.println(nama);
+  }  else if (a == 3) {                                                         //mp3
+    display.setTextSize(1);             // Normal 1:1 pixel scale
+    display.setCursor(0, 0);            // Start at top-left corner
+    display.print("Foldr:");
+    display.print(namafolder[folderaktif]);
+    display.print(" /Vol:");
+    display.println(volume / 3);
+    display.print("Track:");
+    display.print(i + 1);
+    display.print("/");
+    display.print(jml);
+    display.print(" >> ");
+    if (playing_mode == 1) {
+      display.println("A");
+    } else if (playing_mode == 2) {
+      display.println("R");
+    } else if (playing_mode == 3) {
+      display.println("1");
+    }
+    display.print("File :");
+    display.println(playlist[i]);
+  }
+  display.display();
+}
+
+int stepp_sementara = 1;
+void Print_Pilihan_Menu() {
+  if (menu_mp3[1] == 1) {
+    PrintTextMenuMP3("PILIH MODE PLAY", "PLAY ALL");
+  } else if (menu_mp3[1] == 2) {
+    PrintTextMenuMP3("PILIH MODE PLAY", "RANDOM");
+  } else if (menu_mp3[1] == 3) {
+    PrintTextMenuMP3("PILIH MODE PLAY", "1 TRACK");
+  } else if (menu_mp3[1] >= 4) {
+    PrintTextMenuMP3("PILIH FOLDER", namafolder[menu_mp3[1] - 4]);
+  }
+}
+
+void PrintTextMenuMP3(String msg1, String msg2) {
+  display.clearDisplay();
+  display.setTextColor(SSD1306_WHITE);        // Draw white text
+
+  //display.drawLine(0, 0, display.width() - 1, 0, SSD1306_WHITE);
+  display.setCursor(0, 0);
+  display.setTextSize(1);             // Normal 1:1 pixel scale
+  display.println(msg1);
+  //  display.println();
+  display.setCursor(0, 10);
+  display.setTextSize(2);             // Normal 1:1 pixel scale
+  // display.setCursor(0, 7);            // Start at top-left corner
+  display.println(msg2);
+  //  display.drawLine(0, display.height() - 1, display.width() - 1, display.height() - 1 , SSD1306_WHITE);
+  display.display();
+}
+//------------------------------END DISPLAY--------------------
 
 
 //-----------------------------FUNGSI MP3 PLAYER---------------------------
@@ -200,94 +280,12 @@ String getValue(String data, char separator, int index) {
   return dataPart;
 }
 
-//-----------------------------DISPLAY-------------------------
-void PrintText(int a, String pesan) {
-  display.clearDisplay();
-  display.setTextColor(SSD1306_WHITE);        // Draw white text
-  if (a == 1) {                                                                 //pesan
-    display.drawLine(0, 0, display.width() - 1, 0, SSD1306_WHITE);
-    display.setTextSize(2);             // Normal 1:1 pixel scale
-    display.setCursor(0, 7);            // Start at top-left corner
-    display.println(pesan);
-    display.drawLine(0, display.height() - 1, display.width() - 1, display.height() - 1 , SSD1306_WHITE);
-  }  else if (a == 2) {                                                         //radio internet
-    display.setTextSize(1);             // Normal 1:1 pixel scale
-    display.setCursor(0, 0);            // Start at top-left corner
-    display.print("IP  : ");
-    display.println(IP);
-    display.print("Vol : ");
-    display.print(volume / 3);
-    display.print(" /Chnl : ");
-    display.print(indexradio + 1);
-    display.print("/");
-    display.println(jml_stasiun);
-    display.print("Name: ");
-    String nama = url[indexradio][0];
-    nama.trim();
-    display.println(nama);
-  }  else if (a == 3) {                                                         //mp3
-    display.setTextSize(1);             // Normal 1:1 pixel scale
-    display.setCursor(0, 0);            // Start at top-left corner
-    display.print("Foldr: ");
-    display.print(namafolder[folderaktif]);
-    display.print(" /Vol: ");
-    display.println(volume / 3);
-    display.print("Track: ");
-    display.print(i + 1);
-    display.print("/");
-    display.print(jml);
-    display.print(" >> ");
-    if (playing_mode == 1) {
-      display.println("A");
-    } else if (playing_mode == 2) {
-      display.println("R");
-    } else if (playing_mode == 3) {
-      display.println("1");
-    }
 
-    display.print("File : ");
-    display.println(playlist[i]);
-  }
-
-
-  display.display();
-}
-
-int stepp_sementara = 1;
-void Print_Pilihan_Menu() {
-  if (menu_mp3[1] == 1) {
-    PrintTextMenuMP3("PILIH MODE PLAY", "PLAY ALL");
-  } else if (menu_mp3[1] == 2) {
-    PrintTextMenuMP3("PILIH MODE PLAY", "RANDOM");
-  } else if (menu_mp3[1] == 3) {
-    PrintTextMenuMP3("PILIH MODE PLAY", "1 TRACK");
-  } else if (menu_mp3[1] >= 4) {
-    PrintTextMenuMP3("PILIH FOLDER", namafolder[menu_mp3[1] - 4]);
-  }
-}
-
-void PrintTextMenuMP3(String msg1, String msg2) {
-  display.clearDisplay();
-  display.setTextColor(SSD1306_WHITE);        // Draw white text
-
-  //display.drawLine(0, 0, display.width() - 1, 0, SSD1306_WHITE);
-  display.setCursor(0, 0);
-  display.setTextSize(1);             // Normal 1:1 pixel scale
-  display.println(msg1);
-  //  display.println();
-  display.setCursor(0, 10);
-  display.setTextSize(2);             // Normal 1:1 pixel scale
-  // display.setCursor(0, 7);            // Start at top-left corner
-  display.println(msg2);
-  //  display.drawLine(0, display.height() - 1, display.width() - 1, display.height() - 1 , SSD1306_WHITE);
-  display.display();
-}
-//------------------------------END DISPLAY--------------------
 
 void setupAudio() {
   audio.setPinout(I2S_BCLK, I2S_LRC, I2S_DOUT);
   audio.setVolume(volume);         // Check volume level and adjust if necassary
-  audio.setTone(6, 3, 0); //-40 - 6
+  audio.setTone(6, 6, 6); //-40 - 6
 }
 
 void setup() {
@@ -323,7 +321,10 @@ void setup() {
 
 int mode_sementara = 1;
 void loop() {
-  audio.loop();
+  if (modee == 1 || modee == 2 ) {
+    audio.loop();
+  }
+
   if (modee == 0) { //awal nyala, milih mode
     if (digitalRead(up) == HIGH) {
       mode_sementara++;
@@ -363,7 +364,7 @@ void loop() {
         PrintText(1, " CONNECTED");
         indexradio = 15;
         audio.connecttohost(url[indexradio][1].c_str());
-        audio.setTone(6, 3, 0); //-40 - 6
+        audio.setTone(6, 6, 6); //-40 - 6
         delay(100);
         PrintText(2, "");
       }
@@ -392,8 +393,8 @@ void loop() {
           .data_in_num = I2S_PIN_NO_CHANGE
           //.data_in_num = 16
         };
-        a2dp_sink.set_pin_config(my_pin_config);
-        a2dp_sink.start("Musik3in1");
+//        a2dp_sink.set_pin_config(my_pin_config);
+//        a2dp_sink.start("Musik3in1");
 
 
 
