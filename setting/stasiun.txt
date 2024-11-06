@@ -36,3 +36,4 @@ Suara Surabaya	*	http://c5.siar.us:8000/stream
 TOPFM 95.1	*	http://streaming.topfm951.net:9510/stream
 Trax 101.4 FM Jakarta	*	http://n07.radiojar.com/rrqf78p3bnzuv.mp3?rj-tok=AAABi_8o08gA5jtQz3StVoSgZA&rj-ttl=5
 V Radio 106 6 FM Jakarta  	*	http://202.147.199.100:8000/;stream.nsv
+Voice Of Indonesia 4.755 MHz * https://stream-node0.rri.co.id/streaming/25/9125/voi.mp3
